@@ -46,8 +46,12 @@ def make_plots(date,yaxis, xaxis,dfs):
     plt.show()
     return  dfs[date][[xaxis,yaxis]].hist()
 
-dfs=pd.read_pickle('dfs.pkl')
-df_california=pd.read_csv('california.csv').set_index('County')
-df_texas=pd.read_pickle('texas.pkl')
+dfs=pd.read_pickle('http://statistics.uchicago.edu/~burbank/covid/dfs.pkl')
+df_california=pd.read_csv('http://statistics.uchicago.edu/~burbank/covid/california.csv').set_index('County')
+df_texas=pd.read_pickle('http://statistics.uchicago.edu/~burbank/covid/texas.pkl')
+
+#dfs=pd.read_pickle('dfs.pkl')
+#df_california=pd.read_csv('california.csv')
+#df_texas=pd.read_pickle('texas.pkl')
 
 kwargs = {'date':widgets.Dropdown(options=dfs.keys(),value='07-25'),'yaxis':widgets.Dropdown(options=list(dfs['04-01'].select_dtypes('number').columns[2:]),value='Confirmed cases per 100,000 residents'),'xaxis':widgets.Dropdown(options=list(dfs['04-01'].select_dtypes('number').columns[2:]),value='% Population > 64 years'),'dfs':fixed(dfs)}
